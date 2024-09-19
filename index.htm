@@ -782,7 +782,11 @@
 
         function subscribeNow(name, price, frequency) {
             // Handle subscription logic here
-            const phone = prompt("What's the best phone number to reach you about your purchase?");
+            const phone = prompt("What's the best phone number to reach you about your purchase?").trim();
+
+            if (!phone)
+                return alert('Your phone number is required so we can contact you regarding your purchase!');
+
             const returnUrl = encodeURIComponent(window.location.href);
             const cancelUrl = encodeURIComponent(window.location.href);
             const quantity = parseInt(document.querySelector(`select.quantity-select[data-service="${name}"]`).value);
