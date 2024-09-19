@@ -30,20 +30,33 @@
         gtag('config', 'G-H6TNRYX61F');
     </script>
     <style>
+        :root {
+            --primary-color: #8b1a6b;
+            --secondary-color: #732759;
+            --accent-color: #b03080;
+            --background-gradient: linear-gradient(to right, #8b1a6b, #4f0d33);
+            --button-gradient: linear-gradient(135deg, #732759, #b03080);
+            --button-hover-gradient: linear-gradient(135deg, #9c2a7b, #732759);
+            --text-color: white;
+            --cart-bg-color: #3a0d23;
+            --cart-hover-color: #502039;
+            --border-color: #5c1f40;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background: linear-gradient(to right, #4c8baf, #1e4a6d);
-            color: white;
+            background: var(--background-gradient);
+            color: var(--text-color);
             overflow-x: hidden;
         }
 
         header,
         footer {
-            background: linear-gradient(135deg, #1e4a6d, #4c8baf);
-            color: white;
+            background: var(--button-gradient);
+            color: var(--text-color);
             text-align: center;
             padding: 0.5em 0;
             position: relative;
@@ -55,8 +68,8 @@
 
         .call-to-action {
             display: inline-block;
-            background: linear-gradient(135deg, #2a6b8d, #4c8baf);
-            color: white;
+            background: var(--button-gradient);
+            color: var(--text-color);
             padding: 1em 1.5em;
             border-radius: 8px;
             text-decoration: none;
@@ -66,7 +79,7 @@
         }
 
         .call-to-action:hover {
-            background: linear-gradient(135deg, #3c8ec4, #6a9ccf);
+            background: var(--button-hover-gradient);
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
@@ -76,9 +89,9 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #fff;
-            color: #333;
-            border: 1px solid #ddd;
+            background: var(--text-color);
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             max-height: calc(100vh - 60px);
@@ -92,10 +105,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #1e4a6d;
-            color: #fff;
+            background: var(--secondary-color);
+            color: var(--text-color);
             padding: 1em;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid var(--border-color);
             border-radius: 8px 8px 0 0;
         }
 
@@ -113,8 +126,8 @@
 
         .cart-checkout {
             font-size: small;
-            background: linear-gradient(135deg, #2a6b8d, #4c8baf);
-            color: white;
+            background: var(--button-gradient);
+            color: var(--text-color);
             border: none;
             padding: 0.5em 1em;
             border-radius: 4px;
@@ -124,7 +137,7 @@
         }
 
         .cart-checkout:hover {
-            background: linear-gradient(135deg, #3c8ec4, #6a9ccf);
+            background: var(--button-hover-gradient);
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
@@ -149,7 +162,7 @@
         .cart-item {
             display: flex;
             align-items: center;
-            background: #f9f9f9;
+            background: var(--cart-bg-color);
             padding: 0.5em;
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -157,7 +170,7 @@
         }
 
         .cart-item:hover {
-            background-color: #f1f1f1;
+            background-color: var(--cart-hover-color);
             transform: scale(1.02);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
@@ -166,7 +179,7 @@
             width: 60px;
             height: 30px;
             margin-right: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             text-align: center;
             font-size: 1em;
@@ -179,14 +192,14 @@
 
         .cart-item select:focus {
             outline: none;
-            border-color: #1e4a6d;
-            box-shadow: 0 0 5px rgba(30, 74, 109, 0.5);
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 5px rgba(135, 38, 87, 0.5);
         }
 
         .cart-item textarea {
             width: 1em;
             margin-left: 0.5em;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             padding: 0.5em;
             font-size: 0.9em;
@@ -201,7 +214,7 @@
 
         .cart-item .remove {
             cursor: pointer;
-            color: #e74c3c;
+            color: var(--accent-color);
             transition: color 0.3s ease;
         }
 
@@ -212,7 +225,7 @@
         .slogan {
             font-size: 1.5em;
             margin: 1em auto;
-            color: #fff;
+            color: var(--text-color);
             animation: fadeIn 1.5s ease-in-out;
             width: 45%;
         }
@@ -234,8 +247,8 @@
 
         .filter-button,
         .search-input {
-            background: linear-gradient(135deg, #1e4a6d, #4c8baf);
-            color: white;
+            background: var(--button-gradient);
+            color: var(--text-color);
             border: none;
             padding: 0.5em 1em;
             margin: 0.5em;
@@ -252,7 +265,7 @@
 
         .filter-button:hover,
         .search-input:hover {
-            background: linear-gradient(135deg, #2a6b8d, #5a9ccf);
+            background: var(--button-hover-gradient);
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
@@ -261,7 +274,7 @@
             text-align: center;
             margin: 0;
             font-size: 1.5em;
-            color: #fff;
+            color: var(--text-color);
             animation: fadeIn 1.5s ease-in-out;
         }
 
@@ -275,14 +288,12 @@
         }
 
         @media (max-width: 768px) {
-
             .services {
                 grid-template-columns: repeat(1, 1fr);
             }
         }
 
         @media (max-width: 480px) {
-
             .services {
                 grid-template-columns: 1fr;
             }
@@ -291,7 +302,7 @@
         .service {
             background: linear-gradient(135deg, #ffffff, #f0f0f0);
             color: #333;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -310,13 +321,13 @@
 
         .service i {
             font-size: 2em;
-            color: #1e4a6d;
+            color: var(--secondary-color);
             margin-bottom: 0.5em;
         }
 
         .service h2 {
             margin-top: 0;
-            color: #1e4a6d;
+            color: var(--secondary-color);
             overflow: hidden;
             text-overflow: ellipsis;
             word-wrap: break-word;
@@ -329,7 +340,7 @@
         }
 
         .service textarea {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             padding: 0.5em;
             font-size: 0.9em;
@@ -338,8 +349,8 @@
 
         .service button {
             font-size: medium;
-            background: linear-gradient(135deg, #1e4a6d, #4c8baf);
-            color: white;
+            background: var(--button-gradient);
+            color: var(--text-color);
             border: none;
             padding: 0.5em 1em;
             border-radius: 4px;
@@ -349,7 +360,7 @@
         }
 
         .service button:hover {
-            background: linear-gradient(135deg, #2a6b8d, #5a9ccf);
+            background: var(--button-hover-gradient);
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
@@ -375,7 +386,7 @@
             width: 100%;
             padding: 0.5em;
             margin-bottom: 1em;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 1em;
             text-align: center;
@@ -390,7 +401,7 @@
         footer {
             position: relative;
             padding: 2em 1em;
-            background: linear-gradient(135deg, #1e4a6d, #4c8baf);
+            background: var(--button-gradient);
             text-align: left;
         }
 
@@ -400,7 +411,7 @@
             top: 50%;
             transform: translateY(-50%);
             text-decoration: none;
-            color: white;
+            color: var(--text-color);
             transition: transform 0.3s ease;
         }
 
@@ -441,7 +452,6 @@
         }
 
         @media (max-width: 768px) {
-
             .intro-video {
                 position: initial;
                 max-width: 80%;
@@ -453,7 +463,6 @@
         }
 
         @media (max-width: 480px) {
-
             .intro-video {
                 position: initial;
                 max-width: 80%;
@@ -509,24 +518,33 @@
             {
                 category: "Marketing",
                 name: "PPC Campaign Management",
-                description: "Manage pay-per-click advertising campaigns on platforms like Google and Bing Ads.",
-                pricePerUnit: 499,
+                description: "Manage pay-per-click advertising campaign(s) including content creation on platforms like Google and Bing Ads.",
+                pricePerUnit: 249,
                 unitName: "account",
-                maxQuantity: 20,
+                maxQuantity: 40,
                 icon: "fas fa-bullhorn",
                 frequency: "monthly"
             },
             {
                 category: "Marketing",
                 name: "Social Media Management",
-                description: "Setup/manage your social media advertising.",
-                pricePerUnit: 499,
-                unitName: "account",
-                maxQuantity: 20,
+                description: "Setup and manage your social media advertising campaign(s) including content creation.",
+                pricePerUnit: 249,
+                unitName: "campaign",
+                maxQuantity: 40,
                 icon: "fas fa-share-alt",
                 frequency: "monthly"
             },
-
+            {
+                category: "Marketing",
+                name: "Email Marketing Management",
+                description: "Setup and manage your email marketing campaign(s) including content creation.",
+                pricePerUnit: 249,
+                unitName: "campaign",
+                maxQuantity: 40,
+                icon: "fas fa-envelope",
+                frequency: "monthly"
+            },
             // On-page SEO Services
             {
                 category: "On-page SEO",
@@ -618,18 +636,6 @@
                 unitName: "business",
                 maxQuantity: 10,
                 icon: "fas fa-map-marker-alt",
-                frequency: "one-time"
-            },
-
-            // Video Services
-            {
-                category: "Video",
-                name: "Full Video Production",
-                description: "Complete video production services, from concept to final cut.",
-                pricePerUnit: 35,
-                unitName: "hour",
-                maxQuantity: 142,
-                icon: "fas fa-video",
                 frequency: "one-time"
             },
 
