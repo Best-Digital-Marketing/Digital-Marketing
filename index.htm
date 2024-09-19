@@ -785,7 +785,7 @@
             const phone = prompt("What's your contact phone number?").trim();
 
             if (!phone)
-                return alert('Contact phone number is required!');
+                return alert("Contact phone number is required, can't continue!");
 
             const returnUrl = encodeURIComponent(window.location.href);
             const cancelUrl = encodeURIComponent(window.location.href);
