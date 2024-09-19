@@ -663,7 +663,7 @@
                     <select class="quantity-select" data-service="${service.name}">
                         ${[...Array(service.maxQuantity).keys()].map(i => `<option value="${i + 1}">${i + 1} ${service.unitName}${i > 0 ? 's' : ''} x $${service.pricePerUnit} = $${(i + 1) * service.pricePerUnit} ${service.frequency}</option>`).join('')}
                     </select>
-                    <textarea class="notes" placeholder="Add notes, domain(s), keywords, etc... (optional)" data-service="${service.name}"></textarea>
+                    <textarea class="notes" placeholder="Add notes, platforms, domain(s), keywords, etc... (optional)" data-service="${service.name}"></textarea>
                     <button onclick="${service.frequency === 'one-time' ? `addToCart('${service.name}', ${service.pricePerUnit})` : `subscribeNow('${service.name}', ${service.pricePerUnit}, '${service.frequency}')`}">${service.frequency === 'one-time' ? 'Add to Cart' : 'Subscribe Now'}</button>
                 `;
                 container.appendChild(serviceElement);
