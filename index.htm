@@ -20,6 +20,9 @@
     <link rel="icon"
         href="https://uxwing.com/wp-content/themes/uxwing/download/seo-marketing/announcement-color-icon.png"
         type="image/png" sizes="16x16">
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=ATrxZQHYkYGDidw2RPFmx13kIdRU9m9zLwI_IU7FtYx3NgWklcVGow2CuCnqolJb24xTnTTXMUVFGW5J&vault=true&intent=subscription"
+        data-sdk-integration-source="button-factory"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H6TNRYX61F"></script>
     <script>
@@ -517,6 +520,7 @@
         <a href="#" class="back-to-top">Back To Top</a>
     </footer>
     <form id="paypal-form" class="hidden-form" method="post" action="https://www.paypal.com/cgi-bin/webscr"></form>
+    <div id="paypal-btns"></div>
     <script>
         const services = [
             // Marketing Services
@@ -803,7 +807,7 @@
             const returnUrl = encodeURIComponent(window.location.href);
             const cancelUrl = encodeURIComponent(window.location.href);
             const quantity = parseInt(document.querySelector(`select.quantity-select[data-service="${name}"]`).value);
-            const notes = document.querySelector(`textarea.notes[data-service="${name}"]`).value + ' ' + phone;
+            const notes = (document.querySelector(`textarea.notes[data-service="${name}"]`).value + ' ' + phone).trim();
 
             let t3;
 
@@ -822,11 +826,70 @@
                     break;
             }
 
-            const payUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&no_shipping=1&business=pay@BestSEOLosAngeles.com&item_name=${encodeURIComponent(name)}&a3=${(price * quantity).toFixed(2)}&p3=1&t3=${t3}&src=1&sra=1&currency_code=USD&return=${returnUrl}&cancel_return=${cancelUrl}&custom=${encodeURIComponent(notes)}`;
+            // const payUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&no_shipping=1&business=pay@BestSEOLosAngeles.com&item_name=${encodeURIComponent(name)}&a3=${(price * quantity).toFixed(2)}&p3=1&t3=${t3}&src=1&sra=1&currency_code=USD&return=${returnUrl}&cancel_return=${cancelUrl}&custom=${encodeURIComponent(notes)}`;
 
-            window.location.href = payUrl;
+            // window.location.href = payUrl;
+            /* const form = document.getElementById('paypal-form');
+
+            form.innerHTML = `
+                <input type="hidden" name="cmd" value="_xclick-subscriptions">
+                <input type="hidden" name="business" value="pay@BestSEOLosAngeles.com">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="return" value="${window.location.href}">
+                <input type="hidden" name="cancel_return" value="${window.location.href}">
+                <input type="hidden" name="contact_phone" value="1">
+                <input type="hidden" name="no_shipping" value="1">
+                <input type="hidden" name="item_name" value="${name}">
+                <input type="hidden" name="item_number" value="${name}">
+                <input type="hidden" name="a3" value="${(price * quantity).toFixed(2)}">
+                <input type="hidden" name="p3" value="1">
+                <input type="hidden" name="t3" value="${t3}">
+                <input type="hidden" name="src" value="1">
+                <input type="hidden" name="sra" value="1">
+                <input type="hidden" name="custom" value="${notes}">
+                <input type="image" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" alt="Subscribe"> 
+                <img alt="" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" > 
+            `;
+            console.log(form.outerHTML);
+            form.submit(); */
+
+            paypal.Buttons({
+                style: {
+                    shape: 'rect',
+                    color: 'gold',
+                    layout: 'vertical',
+                    label: 'subscribe'
+                },
+                createSubscription: function (data, actions) {
+                    return actions.subscription.create({
+                        /* Creates the subscription */
+                        plan_id: 'P-5GX47940GV874193AM3Y3Z2Q',
+                        quantity: quantity // The quantity of the product for a subscription
+                    });
+                },
+                onApprove: function (data, actions) {
+                    alert(data.subscriptionID); // You can add optional success message for the subscriber here
+                }
+            }).render('#paypal-btns'); // Renders the PayPal button
         }
-
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'blue',
+                layout: 'horizontal',
+                label: 'subscribe'
+            },
+            createSubscription: function (data, actions) {
+                return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-5GX47940GV874193AM3Y3Z2Q',
+                    quantity: quantity // The quantity of the product for a subscription
+                });
+            },
+            onApprove: function (data, actions) {
+                alert(data.subscriptionID); // You can add optional success message for the subscriber here
+            }
+        }).render('#paypal-btns'); // Renders the PayPal button
         function contentLoaded() {
             generateServiceItems();
             generateFilterButtons();
