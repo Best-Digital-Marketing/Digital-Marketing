@@ -856,15 +856,15 @@
             paypal.Buttons({
                 style: {
                     shape: 'rect',
-                    color: 'gold',
-                    layout: 'vertical',
+                    color: 'blue',
+                    layout: 'horizontal',
                     label: 'subscribe'
                 },
                 createSubscription: function (data, actions) {
                     return actions.subscription.create({
                         /* Creates the subscription */
                         plan_id: 'P-5GX47940GV874193AM3Y3Z2Q',
-                        quantity: quantity // The quantity of the product for a subscription
+                        quantity // The quantity of the product for a subscription
                     });
                 },
                 onApprove: function (data, actions) {
@@ -872,24 +872,7 @@
                 }
             }).render('#paypal-btns'); // Renders the PayPal button
         }
-        paypal.Buttons({
-            style: {
-                shape: 'rect',
-                color: 'blue',
-                layout: 'horizontal',
-                label: 'subscribe'
-            },
-            createSubscription: function (data, actions) {
-                return actions.subscription.create({
-                    /* Creates the subscription */
-                    plan_id: 'P-5GX47940GV874193AM3Y3Z2Q',
-                    quantity
-                });
-            },
-            onApprove: function (data, actions) {
-                alert(data.subscriptionID); // You can add optional success message for the subscriber here
-            }
-        }).render('#paypal-btns'); // Renders the PayPal button
+
         function contentLoaded() {
             generateServiceItems();
             generateFilterButtons();
