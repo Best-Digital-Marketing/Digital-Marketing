@@ -20,9 +20,6 @@
     <link rel="icon"
         href="https://uxwing.com/wp-content/themes/uxwing/download/seo-marketing/announcement-color-icon.png"
         type="image/png" sizes="16x16">
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=ATrxZQHYkYGDidw2RPFmx13kIdRU9m9zLwI_IU7FtYx3NgWklcVGow2CuCnqolJb24xTnTTXMUVFGW5J&vault=true&intent=subscription"
-        data-sdk-integration-source="button-factory"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H6TNRYX61F"></script>
     <script>
@@ -678,7 +675,7 @@
                         ${[...Array(service.maxQuantity).keys()].map(i => `<option value="${i + 1}">${i + 1} ${service.unitName}${i > 0 ? 's' : ''} x $${service.pricePerUnit} = $${(i + 1) * service.pricePerUnit} ${service.frequency}</option>`).join('')}
                     </select>
                     <textarea class="notes" placeholder="Add note(s), platform(s), domain(s), keyword(s), etc... (optional)" data-service="${service.name}"></textarea>
-                    <button onclick="${service.frequency === 'one-time' ? `addToCart('${service.name}', ${service.pricePerUnit})` : `subscribeNow('${service.name}', ${service.pricePerUnit}, '${service.frequency}')`}">${service.frequency === 'one-time' ? 'Add to Cart' : 'Subscribe Now'}</button>
+                    <button onclick="${service.frequency === 'one-time' ? `addToCart('${service.name}', ${service.pricePerUnit})` : `addToCart('${service.name}', ${service.pricePerUnit}, '${service.frequency}')`}">${service.frequency === 'one-time' ? 'Add to Cart' : 'Add to Cart' /*'Subscribe Now'*/}</button>
                 `;
                 container.appendChild(serviceElement);
             });
@@ -852,25 +849,6 @@
             `;
             console.log(form.outerHTML);
             form.submit(); */
-
-            paypal.Buttons({
-                style: {
-                    shape: 'rect',
-                    color: 'blue',
-                    layout: 'horizontal',
-                    label: 'subscribe'
-                },
-                createSubscription: function (data, actions) {
-                    return actions.subscription.create({
-                        /* Creates the subscription */
-                        plan_id: 'P-5GX47940GV874193AM3Y3Z2Q',
-                        quantity // The quantity of the product for a subscription
-                    });
-                },
-                onApprove: function (data, actions) {
-                    alert(data.subscriptionID); // You can add optional success message for the subscriber here
-                }
-            }).render('#paypal-btns'); // Renders the PayPal button
         }
 
         function contentLoaded() {
@@ -901,6 +879,11 @@
         function paypalCheckout() {
             if (cart.length < 1) return alert('Cart empty!');
 
+            const phone = prompt("What's your contact phone number so we can reach you?").trim();
+
+            if (!phone)
+                return alert("Contact phone number is required, can't continue!");
+
             const form = document.getElementById('paypal-form');
             form.innerHTML = `
                 <input type="hidden" name="cmd" value="_cart">
@@ -911,6 +894,7 @@
                 <input type="hidden" name="cancel_return" value="${window.location.href}">
                 <input type="hidden" name="contact_phone" value="1">
                 <input type="hidden" name="no_shipping" value="1">
+                <input type="hidden" name="custom" value="${phone}">
             `;
 
             cart.forEach((item, index) => {
@@ -928,7 +912,14 @@
         function venmoCheckout() {
             if (cart.length < 1) return alert('Cart empty!');
 
-            let notes = `Payment for services from ${window.location.href}: `;
+            const phone = prompt("What's your contact phone number so we can reach you?").trim();
+
+            if (!phone)
+                return alert("Contact phone number is required, can't continue!");
+
+            const urlObj = new URL(window.location.href);
+
+            let notes = `Customer Phone: ${phone} - Payment for services from ${urlObj.hostname}: `;
             let amount = 0;
 
             cart.forEach((item, index) => {
