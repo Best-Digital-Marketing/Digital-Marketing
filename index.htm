@@ -884,6 +884,8 @@
             if (!phone)
                 return alert("Contact phone number is required, can't continue!");
 
+            const urlObj = new URL(window.location.href);
+
             const form = document.getElementById('paypal-form');
             form.innerHTML = `
                 <input type="hidden" name="cmd" value="_cart">
@@ -894,7 +896,7 @@
                 <input type="hidden" name="cancel_return" value="${window.location.href}">
                 <input type="hidden" name="contact_phone" value="1">
                 <input type="hidden" name="no_shipping" value="1">
-                <input type="hidden" name="custom" value="${phone}">
+                <input type="hidden" name="custom" value="${urlObj.hostname} - ${phone}">
             `;
 
             cart.forEach((item, index) => {
@@ -944,7 +946,7 @@
             window.location.href = `https://cash.app/$mohammad143/${amount.toFixed(2)}?note=${encodeURIComponent(notes)}`;
         }
 
-        document.getElementById('cart-checkout').addEventListener('click', () => venmoCheckout());
+        document.getElementById('cart-checkout').addEventListener('click', () => paypalCheckout());
     </script>
 </body>
 
