@@ -879,11 +879,6 @@
         function paypalCheckout() {
             if (cart.length < 1) return alert('Cart empty!');
 
-            const phone = prompt("What's your contact phone number so we can reach you?").trim();
-
-            if (!phone)
-                return alert("Contact phone number is required, can't continue!");
-
             const urlObj = new URL(window.location.href);
 
             const form = document.getElementById('paypal-form');
@@ -896,7 +891,7 @@
                 <input type="hidden" name="cancel_return" value="${window.location.href}">
                 <input type="hidden" name="contact_phone" value="1">
                 <input type="hidden" name="no_shipping" value="1">
-                <input type="hidden" name="custom" value="${urlObj.hostname} - ${phone}">
+                <input type="hidden" name="custom" value="${urlObj.hostname}">
             `;
 
             cart.forEach((item, index) => {
