@@ -918,7 +918,7 @@
 
             const urlObj = new URL(window.location.href);
 
-            let notes = `Customer Phone: ${phone} - Payment for services from ${urlObj.hostname}: `;
+            let notes = `Payment for services from ${urlObj.hostname} - Customer Phone ${phone}: `;
             let amount = 0;
 
             cart.forEach((item, index) => {
